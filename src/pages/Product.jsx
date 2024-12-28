@@ -7,7 +7,7 @@ const Product = () => {
   const params = useParams();  // Get the entire params object
   const { productId } = params;  // Destructure productId from params
   const { products } = useContext(ShopContext);
-  const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState();
 
   useEffect(() => {
     console.log("useParams:", params);  // Log the params object
@@ -20,10 +20,12 @@ const Product = () => {
       console.log("productId:", productId);  // Log productId to check its value
       console.log("products:", products);    // Log the products array
 
-      const product = products.find((item) => {
-        console.log("Comparing", item.id, "with", productId);  // Log item.id and productId during comparison
-        return item.id === parseInt(productId);  // Ensure type consistency
-      });
+      // const product = products.find((item) => {
+      //   console.log("Comparing", item._id, "with", productId);  // Log item.id and productId during comparison
+      //   return item._id === parseInt(productId);  // Ensure type consistency
+      // });
+
+      const product = products.find((item) => item._id === productId); // Use string comparison
 
       if (product) {
         setProductData(product);
